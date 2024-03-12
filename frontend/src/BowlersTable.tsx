@@ -4,11 +4,31 @@ import { Bowler } from './types/Bowler';
 function BowlersTable() {
   const [bowlerData, setBowlerData] = useState<Bowler[]>([]);
 
+  // From the videos
+  //useEffect(() => {
+  //  const fetchBowlerData = async () => {
+  //    const rsp = await fetch('http://localhost:5231/api/BowlingLeague');
+  //    const b = await rsp.json();
+  //    setBowlerData(b);
+  //  };
+  //
+  //  fetchBowlerData();
+  //}, []);
+
+  // Updated to handle errors thrown when the backend isn't running (generated w/ help from ChatGPT)
   useEffect(() => {
     const fetchBowlerData = async () => {
-      const rsp = await fetch('http://localhost:5231/api/BowlingLeague');
-      const b = await rsp.json();
-      setBowlerData(b);
+      try {
+        const rsp = await fetch('http://localhost:5231/api/BowlingLeague');
+        if (!rsp.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const b = await rsp.json();
+        setBowlerData(b || []); // Set empty array if response is falsy
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setBowlerData([]); // Set empty array in case of error
+      }
     };
 
     fetchBowlerData();

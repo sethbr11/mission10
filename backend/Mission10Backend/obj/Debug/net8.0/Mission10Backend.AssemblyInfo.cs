@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Mission10Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9434524cb167ca39bc3b87b0c053dd9b6b94a88")]
 [assembly: System.Reflection.AssemblyProductAttribute("Mission10Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Mission10Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
