@@ -9,11 +9,11 @@ function App() {
       <Header
         title="BLE Bowlers"
         description="One of the most competitive and well-regarded bowling leagues this side of the 
-          world, here are some of the best bowlers we have. The bowlers displayed here either on team 
+          world, here are some of the best bowlers we have. The bowlers displayed here are either on team 
           Marlins or team Sharks."
       />
       <br />
-      <BowlersTable />
+      <BowlersTable displayTeams={['Marlins', 'Sharks']} />
     </div>
   );
 }

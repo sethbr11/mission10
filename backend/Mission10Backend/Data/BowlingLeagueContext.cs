@@ -58,8 +58,6 @@ public partial class BowlingLeagueContext : DbContext
             entity.Property(e => e.TeamId)
                 .HasColumnType("INT")
                 .HasColumnName("TeamID");
-
-            entity.HasOne(d => d.Team).WithMany(p => p.Bowlers).HasForeignKey(d => d.TeamId);
         });
 
         modelBuilder.Entity<BowlerScore>(entity =>
@@ -168,10 +166,6 @@ public partial class BowlingLeagueContext : DbContext
                 .HasDefaultValue(0)
                 .HasColumnType("INT")
                 .HasColumnName("TourneyID");
-
-            entity.HasOne(d => d.EvenLaneTeam).WithMany(p => p.TourneyMatchEvenLaneTeams).HasForeignKey(d => d.EvenLaneTeamId);
-
-            entity.HasOne(d => d.OddLaneTeam).WithMany(p => p.TourneyMatchOddLaneTeams).HasForeignKey(d => d.OddLaneTeamId);
 
             entity.HasOne(d => d.Tourney).WithMany(p => p.TourneyMatches).HasForeignKey(d => d.TourneyId);
         });

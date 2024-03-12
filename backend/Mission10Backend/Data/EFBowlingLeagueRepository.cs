@@ -1,10 +1,12 @@
-﻿namespace Mission10Backend.Data {
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Mission10Backend.Data {
     public class EFBowlingLeagueRepository : IBowlingLeagueRepository {
         private BowlingLeagueContext _bowlingContext;
 
         public EFBowlingLeagueRepository(BowlingLeagueContext temp) { _bowlingContext = temp; }
 
-        public IEnumerable<Bowler> Bowlers => _bowlingContext.Bowlers;
+        public IEnumerable<Bowler> Bowlers => _bowlingContext.Bowlers.Include(x => x.Team).ToList();
 
         public IEnumerable<BowlerScore> Scores => _bowlingContext.Scores;
 

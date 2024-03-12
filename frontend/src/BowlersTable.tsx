@@ -1,20 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Bowler } from './types/Bowler';
 
-function BowlersTable() {
+function BowlersTable(props: any) {
   const [bowlerData, setBowlerData] = useState<Bowler[]>([]);
-  const [teamNames, setTeamNames] = useState<{ [teamId: number]: string }>({}); // To get team names
-
-  // From the videos
-  //useEffect(() => {
-  //  const fetchBowlerData = async () => {
-  //    const rsp = await fetch('http://localhost:5231/api/BowlingLeague');
-  //    const b = await rsp.json();
-  //    setBowlerData(b);
-  //  };
-  //
-  //  fetchBowlerData();
-  //}, []);
 
   // Updated to handle errors thrown when the backend isn't running (generated w/ help from ChatGPT)
   useEffect(() => {
@@ -35,6 +23,17 @@ function BowlersTable() {
     fetchBowlerData();
   }, []);
 
+  const filteredTeamNames = props.displayTeams;
+
+  var filteredBowlers = bowlerData.filter((b) =>
+    filteredTeamNames.includes(b.team.teamName),
+  );
+
+  // If nothing was passed, display them all
+  if (!filteredTeamNames || filteredTeamNames.length === 0) {
+    filteredBowlers = bowlerData;
+  }
+
   return (
     <div>
       <div className="row">
@@ -42,25 +41,26 @@ function BowlersTable() {
           <thead>
             <tr>
               <th>Last Name</th>
-              <th>First Name</th>
+              <th>First Names</th>
               <th>Address</th>
               <th>Phone</th>
               <th>Team</th>
             </tr>
           </thead>
           <tbody>
-            {bowlerData.map((b) => (
+            {filteredBowlers.map((b) => (
               <tr key={b.bowlerId}>
                 <td>{b.bowlerLastName}</td>
                 <td>
-                  {b.bowlerFirstName} {b.bowlerMiddleInit}
+                  {b.bowlerFirstName}{' '}
+                  {b.bowlerMiddleInit ? b.bowlerMiddleInit + '.' : ''}
                 </td>
                 <td>
                   {b.bowlerAddress}, {b.bowlerCity}, {b.bowlerState}{' '}
                   {b.bowlerZip}
                 </td>
                 <td>{b.bowlerPhoneNumber}</td>
-                <td>{b.teamId}</td>
+                <td>{b.team?.teamName}</td>
               </tr>
             ))}
           </tbody>
