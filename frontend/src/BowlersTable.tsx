@@ -3,6 +3,7 @@ import { Bowler } from './types/Bowler';
 
 function BowlersTable() {
   const [bowlerData, setBowlerData] = useState<Bowler[]>([]);
+  const [teamNames, setTeamNames] = useState<{ [teamId: number]: string }>({}); // To get team names
 
   // From the videos
   //useEffect(() => {
