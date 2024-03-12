@@ -36,9 +36,6 @@ function BowlersTable() {
 
   return (
     <div>
-      <div>
-        <h1>BLE Bowlers</h1>
-      </div>
       <div className="row">
         <table className="table table-bordered">
           <thead>
